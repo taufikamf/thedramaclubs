@@ -18,6 +18,9 @@
 </template>
 <script setup>
     const runtimeConfig = useRuntimeConfig()
+    import { usePostStore } from '~/stores/PostStore';
+    const postStore = usePostStore()
+    postStore.showContent = true
     const page = ref(1)
 
     const {data, pending, refresh} = await useFetch(()=>`${runtimeConfig.public.API_URL}wp-json/wp/v2/posts?page=${page.value}&_embed=1`)

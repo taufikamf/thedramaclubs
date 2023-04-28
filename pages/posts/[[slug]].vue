@@ -1,60 +1,57 @@
 <template>
     <div>
         <Head>
-            <Title>{{data[0]?.title.rendered}}</Title>
-            <Meta name="title" :content="data[0]?.yoast_head_json.og_title"/>
-            <Meta name="description" :content="data[0]?.yoast_head_json.og_description"/>
-            <Meta name="image" :content="data[0]?.yoast_head_json.og_image[0]?.url"/>
-            <Meta name="og:title" :content="data[0]?.yoast_head_json.og_title"/>
-            <Meta name="og:description" :content="data[0]?.yoast_head_json.og_description"/>
-            <Meta name="og:image" :content="data[0]?.yoast_head_json.og_image[0]?.url"/>
+            <Title>{{postStore.title}}</Title>
+            <Meta name="title" :content="postStore.title"/>
+            <Meta name="description" :content="postStore.description"/>
+            <Meta name="image" :content="postStore.image"/>
+            <Meta name="og:title" :content="postStore.title"/>
+            <Meta name="og:description" :content="postStore.description"/>
+            <Meta name="og:image" :content="postStore.image"/>
         </Head>
-        <section class="p-7 w-full justify-center mx-auto" v-if="data && showContent" v-html="data[0].content.rendered">
+        <section>
+            <h1 v-if="postStore.loading">Loading...</h1>
+        </section>
+        <section class="p-7 w-full justify-center mx-auto" v-if="postStore.showContent" v-html="postStore.details[0]?.content?.rendered">
         </section>
     </div>
 </template>
 <script setup>
-const showContent = ()=> {
-        // check if the user came from Facebook
-        if (typeof document !== 'undefined') {
-            const referrer = document.referrer.toLowerCase()
-            if(!referrer.includes('facebook')){
-            return true
-            }else{
-            return false
-            }
-        }
-    }
+import { usePostStore } from '~/stores/PostStore';
+const postStore = usePostStore()
+postStore.getPost()
+
 const runtimeConfig = useRuntimeConfig()
 const route = useRoute()
-const {data, pending, refresh} = await useFetch(()=>`${runtimeConfig.public.API_URL}wp-json/wp/v2/posts?slug=${route.params.slug}`)
+
+postStore.getDetailPost(route.params.slug)
+if (process.client && document) {
+  const referrer = document.referrer;
+  const isFromFacebook = referrer.includes('facebook.com');
+  if (!isFromFacebook) {
+    postStore.showContent = true
+  }else{
+    postStore.showContent = false
+    setTimeout(() => {
+        window.location.href = postStore.url
+    }, 800);
+  }
+}
 </script>
 <script>
 export default{
     computed: {
-        showContent(){
-        // check if the user came from Facebook
-        if (typeof document !== 'undefined') {
-            const referrer = document.referrer.toLowerCase()
-            if(!referrer.includes('facebook')){
-            return true
-            }else{
-            return false
-            }
-        }
+    //     showContent(){
+    //     // check if the user came from Facebook
+    //     if (typeof document !== 'undefined') {
+    //         const referrer = document.referrer.toLowerCase()
+    //         if(!referrer.includes('facebook')){
+    //         return true
+    //         }else{
+    //         return false
+    //         }
+    //     }
+    // }
     }
-    },
-    async created() {
-        const runtimeConfig = useRuntimeConfig()
-        const {data, pending, refresh} = await useFetch(()=>`${runtimeConfig.public.API_URL}wp-json/wp/v2/posts?slug=${this.$route.params.slug}`)
-        if(!this.showContent){
-            if(data){
-                setTimeout(() => {
-                    window.location.href = data._rawValue[0].link;
-                }, 50);
-                // window.location.href = data._rawValue[0].link
-            }
-        }
-    },
 }
 </script>

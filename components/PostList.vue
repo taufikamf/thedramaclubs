@@ -4,7 +4,7 @@
             <figure><img :src="post.yoast_head_json.og_image[0].url" alt="Shoes" /></figure>
             <div class="card-body">
                 <nuxt-link class="card-title hover:underline" :to="(`/posts/${post.slug}`)">
-                {{ post.title.rendered }}
+                {{ shortenedStr(post.title.rendered) }}
                 </nuxt-link>
                 <p class="mt-2">{{ shortenedStr(post.yoast_head_json.og_description) }}</p>
                 <div class="card-actions justify-between pt-2">

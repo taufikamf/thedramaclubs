@@ -24,4 +24,9 @@ export default defineNuxtConfig({
     imports: {
       dirs: ['stores'],
     },
+    router:{
+      middleware: [
+        'facebook'
+      ]
+    }
 })

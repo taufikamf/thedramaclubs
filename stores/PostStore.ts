@@ -4,6 +4,7 @@ import { defineStore } from 'pinia'
 export const usePostStore = defineStore('postStore', {
   state: () => ({
     posts: ['asdasdad'],
+    allPost: [],
     details: [],
     loading: false,
     url:'',
@@ -44,6 +45,12 @@ export const usePostStore = defineStore('postStore', {
     },
     redirectLink(){
       window.location.href = this.url
+    },
+    async getDetailLink(slug: string){
+      const res = await fetch(`https://thedramaclubs.com/wp-json/wp/v2/posts?slug=${slug}`)
+      const data = await res.json()
+
+      
     }
   }
 })

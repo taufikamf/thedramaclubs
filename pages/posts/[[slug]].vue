@@ -17,6 +17,9 @@
     </div>
 </template>
 <script setup>
+definePageMeta({
+  middleware: "facebook",
+});
 import { usePostStore } from '~/stores/PostStore';
 const route = useRoute()
 const runtimeConfig = useRuntimeConfig()
@@ -25,36 +28,6 @@ const {data, pending, refresh} = await useFetch(()=>`${runtimeConfig.public.API_
 
 const postStore = usePostStore()
 postStore.getPost()
+</script>
 
 
-postStore.getDetailPost(route.params.slug)
-if (process.client && document) {
-  const referrer = document.referrer;
-  const isFromFacebook = referrer.includes('facebook.com');
-  if (!isFromFacebook) {
-    postStore.showContent = true
-  }else{
-    postStore.showContent = false
-    setTimeout(() => {
-        window.location.href = postStore.url
-    }, 800);
-  }
-}
-</script>
-<script>
-export default{
-    computed: {
-    //     showContent(){
-    //     // check if the user came from Facebook
-    //     if (typeof document !== 'undefined') {
-    //         const referrer = document.referrer.toLowerCase()
-    //         if(!referrer.includes('facebook')){
-    //         return true
-    //         }else{
-    //         return false
-    //         }
-    //     }
-    // }
-    }
-}
-</script>

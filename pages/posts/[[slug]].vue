@@ -25,9 +25,9 @@ const route = useRoute()
 const runtimeConfig = useRuntimeConfig()
 
 const {data, pending, refresh} = await useFetch(()=>`${runtimeConfig.public.API_URL}wp-json/wp/v2/posts?slug=${route.params.slug}`)
-
 const postStore = usePostStore()
-postStore.getPost()
+postStore.showContent = true
+postStore.getDetailPost(route.params.slug)
 </script>
 
 

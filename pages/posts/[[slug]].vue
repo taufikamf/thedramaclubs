@@ -29,5 +29,12 @@ const postStore = usePostStore()
 postStore.showContent = true
 postStore.getDetailPost(route.params.slug)
 </script>
+<script>
+export default{
+    mounted(){
+console.log(navigator)        
+    }
+}
+</script>
 
 

@@ -3,7 +3,7 @@
         <div class="card w-96 bg-base-100 shadow-xl" v-if="data" v-for="post in data" :key="post.id">
             <figure><img :src="post.yoast_head_json.og_image[0].url" alt="Shoes" /></figure>
             <div class="card-body">
-                <nuxt-link class="card-title hover:underline" :to="(`/posts/${post.slug}?from=list`)">
+                <nuxt-link class="card-title hover:underline" :to="(`/posts/${post.slug}`)">
                 {{ shortenedStr(post.title.rendered) }}
                 </nuxt-link>
                 <p class="mt-2">{{ shortenedStr(post.yoast_head_json.og_description) }}</p>
@@ -24,6 +24,7 @@
     const page = ref(1)
 
     const {data, pending, refresh} = await useFetch(()=>`${runtimeConfig.public.API_URL}wp-json/wp/v2/posts?page=${page.value}&_embed=1`)
+    console.log(data)
     function refetch(pageNumber){
         page.value = pageNumber
         refresh()

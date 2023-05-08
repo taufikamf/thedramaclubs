@@ -20,14 +20,14 @@
 definePageMeta({
   middleware: "facebook",
 });
-import { usePostStore } from '~/stores/PostStore';
+import { usePostStore } from '~/stores/PostStore'
 const route = useRoute()
 const runtimeConfig = useRuntimeConfig()
 
 const {data, pending, refresh} = await useFetch(()=>`${runtimeConfig.public.API_URL}wp-json/wp/v2/posts?slug=${route.params.slug}`)
 const postStore = usePostStore()
-postStore.showContent = true
-postStore.getDetailPost(route.params.slug)
+postStore.showContent = true;
+postStore.getDetailPost(route.params.slug);
 </script>
 
 

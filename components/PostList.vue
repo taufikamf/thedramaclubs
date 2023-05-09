@@ -71,7 +71,7 @@ export default{
             return month + " " + day + ", " + year;
         },
         copyToClipboard(text) {
-        this.toCopy = `${window.location.href}client/${text}`
+        this.toCopy = `${window.location.href}api/content/${text}`
         navigator.clipboard.writeText(this.toCopy)
             .then(() => {
             console.log('Text copied to clipboard')

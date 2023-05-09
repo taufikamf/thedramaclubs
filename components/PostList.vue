@@ -25,7 +25,7 @@
                 </div>
             </td>
             <td>
-                <button @click="copyToClipboard(`${this.domain}/client/${post.slug}`)" class="btn btn-accent">Copy</button>
+                <button @click="copyToClipboard(`${post.slug}`)" class="btn btn-accent">Copy</button>
             </td>
         </tr>
         </tbody>
@@ -50,7 +50,7 @@
 export default{
     data() {
         return {
-            domain: ''
+            toCopy: ''
         }
     },
     methods: {
@@ -71,7 +71,8 @@ export default{
             return month + " " + day + ", " + year;
         },
         copyToClipboard(text) {
-        navigator.clipboard.writeText(text)
+        this.toCopy = `${window.location.href}client/${text}`
+        navigator.clipboard.writeText(this.toCopy)
             .then(() => {
             console.log('Text copied to clipboard')
             })
@@ -79,9 +80,6 @@ export default{
             console.error('Could not copy text: ', error)
             })
         }
-    },
-    mounted(){
-        this.domain = window.location.origin
     }
 }
 </script>

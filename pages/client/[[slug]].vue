@@ -5,7 +5,6 @@
             <Meta name="title" :content="data[0]?.title.rendered"/>
             <Meta name="description" :content="data[0]?.yoast_head_json?.og_description"/>
             <Meta name="image" :content="yoast_head_json?.og_image[0]?.url"/>
-            <Meta name="og:url" :content="'https://thedramaclubs.vercel.app/'"/>
             <Meta name="og:title" :content="data[0]?.title.rendered"/>
             <Meta name="og:description" :content="data[0]?.yoast_head_json?.og_description"/>
             <Meta name="og:image" :content="data[0].yoast_head_json?.og_image[0]?.url"/>

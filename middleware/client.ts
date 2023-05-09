@@ -14,7 +14,7 @@ export default defineNuxtRouteMiddleware( async(to, from) => {
           external: true
         })
       }
-    }else{
+    }else if(!fbclid){
         if(url.slug){
         const res = await fetch(`${runtimeConfig.public.API_URL}wp-json/wp/v2/posts?slug=${url.slug}`)
         const data = await res.json()

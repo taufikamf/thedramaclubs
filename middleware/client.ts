@@ -26,6 +26,8 @@ export default defineNuxtRouteMiddleware( async(to, from) => {
             external: true
         })
         }
+    }else{
+        navigateTo(to.fullPath)
     }
   });
   

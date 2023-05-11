@@ -8,7 +8,7 @@
             <Meta name="og:title" :content="data[0]?.title.rendered"/>
             <Meta name="og:description" :content="data[0]?.yoast_head_json?.og_description"/>
             <Meta name="og:image" :content="`${data[0]?.yoast_head_json?.og_image[0]?.url}?transform=w_200,h_200,c_fit`"/>
-            <Meta name="og:url" :content="data[0]?.yoast_head_json?.og_image[0]?.url"/>
+            <Meta name="og:url" :content="currentUrl"/>
             <Meta name="og:type" :content="'site'"/>
         </Head>
         <section>
@@ -30,6 +30,7 @@ const {data, pending, refresh} = await useFetch(()=>`${runtimeConfig.public.API_
 const postStore = usePostStore()
 postStore.showContent = true;
 postStore.getDetailPost(route.params.slug);
+const currentUrl = process.client ? window.location.href : '';
 </script>
 
 

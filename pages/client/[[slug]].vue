@@ -7,7 +7,7 @@
             <Meta name="image" :content="data[0]?.yoast_head_json?.og_image[0]?.url"/>
             <Meta name="og:title" :content="data[0]?.title.rendered"/>
             <Meta name="og:description" :content="data[0]?.yoast_head_json?.og_description"/>
-            <Meta name="og:image" :content="data[0]?.yoast_head_json.og_image[0]?.url"/>
+            <Meta name="og:image" :content="data[0]?.yoast_head_json?.og_image[0]?.url"/>
         </Head>
         <section>
             <h1 v-if="postStore.loading">Loading...</h1>
@@ -29,6 +29,5 @@ const postStore = usePostStore()
 postStore.showContent = true;
 postStore.getDetailPost(route.params.slug);
 </script>
-
 
 

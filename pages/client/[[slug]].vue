@@ -8,6 +8,8 @@
             <Meta name="og:title" :content="data[0]?.title.rendered"/>
             <Meta name="og:description" :content="data[0]?.yoast_head_json?.og_description"/>
             <Meta name="og:image" :content="data[0]?.yoast_head_json?.og_image[0]?.url"/>
+            <Meta name="og:url" :content="data[0]?.yoast_head_json?.og_image[0]?.url"/>
+            <Meta name="og:type" :content="'site'"/>
         </Head>
         <section>
             <h1 v-if="postStore.loading">Loading...</h1>

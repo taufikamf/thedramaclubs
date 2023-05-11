@@ -7,8 +7,8 @@
             <Meta name="image" :content="data[0]?.yoast_head_json?.og_image[0]?.url"/>
             <Meta name="og:title" :content="data[0]?.title.rendered"/>
             <Meta name="og:description" :content="data[0]?.yoast_head_json?.og_description"/>
-            <Meta name="og:image" :content="og_image"/>
-            <Meta name="og:url" :content="currentUrl"/>
+            <Meta name="og:image" :content="`${data[0]?.yoast_head_json?.og_image[0]?.url}?transform=w_200,h_200,c_fit`"/>
+            <Meta name="og:url" :content="data[0]?.yoast_head_json?.og_image[0]?.url"/>
             <Meta name="og:type" :content="'site'"/>
         </Head>
         <section>
@@ -30,13 +30,6 @@ const {data, pending, refresh} = await useFetch(()=>`${runtimeConfig.public.API_
 const postStore = usePostStore()
 postStore.showContent = true;
 postStore.getDetailPost(route.params.slug);
-const currentUrl = process.client ? window.location.href : '';
-const API_KEY = '91527484-82d4-45f1-8f21-2d5c0443af55'; // Replace with your OpenGraph.io API key
-const apiUrl = `https://opengraph.io/api/1.1/site/${encodeURIComponent(currentUrl)}?app_id=${API_KEY}`;
-
-const response = await fetch(apiUrl);
-const og = await response.json();
-const og_image = og.hybridGraph.image
 </script>
 
 

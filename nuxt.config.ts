@@ -3,9 +3,11 @@ export default defineNuxtConfig({
     runtimeConfig: {
       API_URL: process.env.WP_URL,
       VERCEL_URL: process.env.VERCEL_URL,
+      PAGE_TITLE: process.env.PAGE_TITLE,
       public:{
         API_URL: process.env.WP_URL,
         VERCEL_URL: process.env.VERCEL_URL,
+        PAGE_TITLE: process.env.PAGE_TITLE
       }
     },
     css: ['~/assets/css/main.css'],
